@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .input-group input,
+    .input-group select {
+      padding: 5px;
+      width: 100%;
+    }
+    .button-group {
+      margin-top: 20px;
+    }
+    .button-group button {
+      padding: 5px 10px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      margin-right: 10px;
+    }
+    .button-group button:hover {
+      background-color: #45a049;
+    }
+    nav {
+      background-color: #333;
+      overflow: hidden;
+  }
+  nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+  }
+  nav a:hover {
+      background-color: #ddd;
+      color: black;
+  }
+  table{
+    font-family: 'Times New Roman', Times, serif;
+    color: midnightblue;
+}
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+        <td width="40%" align="left"> <img src="logo.jpeg" width="100px" height="100px"/></td>
+        <td width="60%" align="center"><center><h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp River Garden</h1></center></td>
+    </tr>
+</table>
+<nav>
+    <a href="home.html">Home</a>
+    <a href="rooms.html">Rooms & Suites</a>
+    <a href="attraction.html">Attractions</a>
+    <a href="DE.html">Booking</a>
+    <a href="about.html">About Us</a>
+</nav>
+<br>
+<br>
+  <div class="container">
+    <form id="hotelForm">
+      <div class="input-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" />
+      </div>
+      <div class="input-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" />
+      </div>
+      <div class="input-group">
+        <label for="cindate">Check-in Date:</label>
+        <input type="date" id="cindate" />
+      </div>
+      <div class="input-group">
+        <label for="coutdate">Check-out Date:</label>
+        <input type="date" id="coutdate" />
+      </div>
+      <div class="input-group">
+        <label for="roomType">Room Type:</label>
+        <select id="roomType">
+          <option value="1">Premiere Suite - Rs. 6000 PN</option>
+          <option value="2">Junior Suite - Rs. 5000 PN</option>
+          <option value="3">Queen Room - Rs. 4000 PN</option>
+          <option value="4">King Room - Rs. 3000 PN</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="nights">Number of Nights:</label>
+        <input type="number" id="nights" min="1" value="1" />
+      </div>
+      <div class="button-group">
+        <button type="button" id="calculateRent">Calculate Room Rent</button>
+        <button type="button" id="calculateTotal">Show Total Cost</button>
+        <button type="button" id="booknow">Book Now</button>
+      </div>
+    </form>
+    <div id="bill" style="display: none;">
+      <h2>Hotel Bill</h2>
+      <div id="billContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const hotelForm = document.getElementById("hotelForm");
+    const nameInput = document.getElementById("name");
+    const addressInput = document.getElementById("address");
+    const cindateInput = document.getElementById("cindate");
+    const coutdateInput = document.getElementById("coutdate");
+    const roomTypeSelect = document.getElementById("roomType");
+    const nightsInput = document.getElementById("nights");
+    const calculateRentBtn = document.getElementById("calculateRent");
+    const calculateTotalBtn = document.getElementById("calculateTotal");
+    const bill = document.getElementById("bill");
+    const billContent = document.querySelector("#billContent");
+
+    calculateRentBtn.addEventListener("click", calculateRent);
+    calculateTotalBtn.addEventListener("click", calculateTotal);
+
+    function calculateRent() {
+      // Retrieve selected room type and number of nights
+      const selectedRoomType = roomTypeSelect.value;
+      const numberOfNights = nightsInput.value;
+
+      // Calculate room rent based on selected room type and number of nights
+      let roomRent;
+      switch (selectedRoomType) {
+        case "1":
+          roomRent = 6000;
+          break;
+        case "2":
+          roomRent = 5000;
+          break;
+        case "3":
+          roomRent = 4000;
+          break;
+        case "4":
+          roomRent = 3000;
+          break;
+        default:
+          roomRent = 0;
+      }
+
+      // Calculate total room rent
+      const totalRent = roomRent * numberOfNights;
+
+      // Display room rent
+      billContent.innerHTML = `
+        <p>Room Rent: Rs. ${roomRent} per night</p>
+        <p>Number of Nights: ${numberOfNights}</p>
+        <p>Total Room Rent: Rs. ${totalRent}</p>
+      `;
+
+      // Show the bill
+      bill.style.display = "block";
+    }
+
+    function calculateTotal() {
+      // Retrieve selected room type and number of nights
+      const selectedRoomType = roomTypeSelect.value;
+      const numberOfNights = nightsInput.value;
+
+      // Calculate room rent based on selected room type and number of nights
+      let roomRent;
+      switch (selectedRoomType) {
+        case "1":
+          roomRent = 6000;
+          break;
+        case "2":
+          roomRent = 5000;
+          break;
+        case "3":
+          roomRent = 4000;
+          break;
+        case "4":
+          roomRent = 3000;
+          break;
+        default:
+          roomRent = 0;
+      }
+
+      // Calculate total room rent
+      const totalRent = roomRent * numberOfNights;
+
+      // Calculate tax (assuming 10% tax rate)
+      const tax = totalRent * 0.1;
+
+      // Calculate total cost including tax
+      const totalCost = totalRent + tax;
+
+      // Display total cost
+      billContent.innerHTML = `
+        <p>Room Rent: Rs. ${roomRent} per night</p>
+        <p>Number of Nights: ${numberOfNights}</p>
+        <p>Total Room Rent: Rs. ${totalRent}</p>
+        <p>Tax (10%): Rs. ${tax}</p>
+        <p>Total Cost (including tax): Rs. ${totalCost}</p>
+      `;
+
+      // Show the bill
+      bill.style.display = "block";
+    }
+  </script>
+</body>
+</html>
